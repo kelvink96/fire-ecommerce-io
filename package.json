@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "lottie-web": "^5.9.1",
     "redux-devtools-extension": "^2.13.9"
   }
 }

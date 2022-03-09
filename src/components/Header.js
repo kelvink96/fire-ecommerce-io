@@ -6,6 +6,7 @@ import {BsCart} from "react-icons/bs";
 const Header = () => {
 
 	const {cartItems} = useSelector(state => state.cartReducer);
+	const {user} = JSON.parse(localStorage.getItem("currentUser"));
 
 	return (
 		<div className="header">
@@ -15,7 +16,7 @@ const Header = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ms-auto">
-							<Nav.Link href="/">user</Nav.Link>
+							<Nav.Link href="/">{user.email.split('@')[0]}</Nav.Link>
 							<Nav.Link href="/">orders</Nav.Link>
 							<Nav.Link href="/cart"><BsCart/> cart {cartItems.length}</Nav.Link>
 							<Nav.Link href="/">logout</Nav.Link>
