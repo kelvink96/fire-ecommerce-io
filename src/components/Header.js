@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useSelector} from "react-redux";
+import {BsCart} from "react-icons/bs";
 
 const Header = () => {
 
@@ -16,7 +17,7 @@ const Header = () => {
 						<Nav className="ms-auto">
 							<Nav.Link href="/">user</Nav.Link>
 							<Nav.Link href="/">orders</Nav.Link>
-							<Nav.Link href="/cart">cart {cartItems.length}</Nav.Link>
+							<Nav.Link href="/cart"><BsCart/> cart {cartItems.length}</Nav.Link>
 							<Nav.Link href="/">logout</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>

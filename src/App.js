@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import ProductInfo from "./pages/ProductInfo";
 import RegisterPage from "./pages/RegisterPage";
 import CartPage from "./pages/CartPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 	return (

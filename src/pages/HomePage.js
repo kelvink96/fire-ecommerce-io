@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const HomePage = () => {
 	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const {cartItems} = useSelector(state => state.cartReducer);
 	const dispatch = useDispatch();
 
@@ -17,16 +18,19 @@ const HomePage = () => {
 
 	const getProductsData = async () => {
 		try {
+			setLoading(true);
 			const productsItems = await getDocs(collection(firebaseDB, "products"));
 			const productsArray = [];
 			productsItems.forEach(p => {
 				const obj = {id: p.id, ...p.data()}
 
 				productsArray.push(obj);
+				setLoading(false);
 			});
 			setProducts(productsArray);
 		} catch (e) {
-
+			setLoading(false);
+			console.log(e);
 		}
 	}
 
@@ -39,33 +43,29 @@ const HomePage = () => {
 	}
 
 	return (
-		<Layout>
-			{/*<Button size="lg" onClick={addProductsData}>add</Button>*/}
+		<Layout loading={loading}>
 			<Row xs={1} md={2} lg={3} xl={4} className="g-3">
-				{products.map((p, idx) => (
-					<Col key={p.id}>
-						<Card className="h-100">
-							<Link to={`/productinfo/${p.id}`} className="text-decoration-none text-dark">
-								<Card.Img variant="top" src={p.imageUrl} height={200} style={{objectFit: "contain"}}/>
-								<Card.Body>
-									<Card.Title>{p.name}</Card.Title>
-									<Card.Text className="mb-5">
-										This is a longer card with supporting text below as a natural
-										lead-in to additional content. This content is a little bit longer.
-									</Card.Text>
-								</Card.Body>
-							</Link>
-							<Card.Footer className="bg-transparent border-0">
-								<div className="position-absolute bottom-0 mb-3 d-flex gap-2">
-									<Button onClick={() => addToCart(p)}>add to cart</Button>
-								</div>
-							</Card.Footer>
-						</Card>
-					</Col>
-				))}
+				{products.map((p, idx) => (<Col key={p.id}>
+					<Card className="h-100">
+						<Link to={`/productinfo/${p.id}`} className="text-decoration-none text-dark">
+							<Card.Img variant="top" src={p.imageUrl} height={200} style={{objectFit: "contain"}}/>
+							<Card.Body>
+								<Card.Title>{p.name}</Card.Title>
+								<Card.Text className="mb-5">
+									This is a longer card with supporting text below as a natural
+									lead-in to additional content. This content is a little bit longer.
+								</Card.Text>
+							</Card.Body>
+						</Link>
+						<Card.Footer className="bg-transparent border-0">
+							<div className="position-absolute bottom-0 mb-3 d-flex gap-2">
+								<Button onClick={() => addToCart(p)}>add to cart</Button>
+							</div>
+						</Card.Footer>
+					</Card>
+				</Col>))}
 			</Row>
-		</Layout>
-	);
+		</Layout>);
 };
 
 export default HomePage;
