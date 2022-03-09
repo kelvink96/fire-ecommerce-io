@@ -4,8 +4,8 @@ import {Container, Nav, Navbar} from "react-bootstrap";
 const Header = () => {
 	return (
 		<div className="header">
-			<Navbar bg="light" expand="lg" fixed="top">
-				<Container fluid>
+			<Navbar bg="primary" variant="dark" expand="lg" fixed="top" className="shadow">
+				<Container>
 					<Navbar.Brand href="/">firecommerce</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 					<Navbar.Collapse id="basic-navbar-nav">
