@@ -4,21 +4,12 @@ import {Link} from "react-router-dom";
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
 import Layout from "../components/Layout";
+import {useDispatch, useSelector} from "react-redux";
 
 const HomePage = () => {
 	const [products, setProducts] = useState([]);
-
-	/*const addProductsData = (evt) => {
-		evt.preventDefault();
-		alert('');
-		cartProducts.map(async (product) => {
-			try {
-				await addDoc(collection(firebaseDB, "products"), product);
-			} catch (e) {
-				console.log(e.message);
-			}
-		});
-	}*/
+	const {cartItems} = useSelector(state => state.cartReducer);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getProductsData();
@@ -39,6 +30,14 @@ const HomePage = () => {
 		}
 	}
 
+	useEffect(() => {
+		localStorage.setItem("cartItems", JSON.stringify(cartItems));
+	}, [cartItems]);
+
+	const addToCart = (product) => {
+		dispatch({type: "ADD_TO_CART", payload: product})
+	}
+
 	return (
 		<Layout>
 			{/*<Button size="lg" onClick={addProductsData}>add</Button>*/}
@@ -55,12 +54,12 @@ const HomePage = () => {
 										lead-in to additional content. This content is a little bit longer.
 									</Card.Text>
 								</Card.Body>
-								<Card.Footer className="bg-transparent border-0">
-									<div className="position-absolute bottom-0 mb-3 d-flex gap-2">
-										<Button>add to cart</Button>
-									</div>
-								</Card.Footer>
 							</Link>
+							<Card.Footer className="bg-transparent border-0">
+								<div className="position-absolute bottom-0 mb-3 d-flex gap-2">
+									<Button onClick={() => addToCart(p)}>add to cart</Button>
+								</div>
+							</Card.Footer>
 						</Card>
 					</Col>
 				))}
