@@ -8,6 +8,11 @@ const Header = () => {
 	const {cartItems} = useSelector(state => state.cartReducer);
 	const {user} = JSON.parse(localStorage.getItem("currentUser"));
 
+	const logOut = () => {
+		localStorage.removeItem("currentUser");
+		window.location.reload();
+	}
+
 	return (
 		<div className="header">
 			<Navbar bg="secondary" variant="dark" expand="lg" fixed="top" className="shadow">
@@ -19,7 +24,7 @@ const Header = () => {
 							<Nav.Link href="/">{user.email.split('@')[0]}</Nav.Link>
 							<Nav.Link href="/">orders</Nav.Link>
 							<Nav.Link href="/cart"><BsCart/> cart {cartItems.length}</Nav.Link>
-							<Nav.Link href="/">logout</Nav.Link>
+							<Nav.Link onClick={logOut}>logout</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProductInfo from "./pages/ProductInfo";
@@ -11,11 +11,12 @@ function App() {
 		<div>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<HomePage/>}/>
+					<Route path="/" element={<ProtectedRoutes><HomePage/></ProtectedRoutes>}/>
+					<Route path="/productinfo/:productid" element={<ProtectedRoutes><ProductInfo/></ProtectedRoutes>}/>
+					<Route path="/cart" element={<ProtectedRoutes><CartPage/></ProtectedRoutes>}/>
+
 					<Route path="/login" element={<LoginPage/>}/>
 					<Route path="/register" element={<RegisterPage/>}/>
-					<Route path="/productinfo/:productid" element={<ProductInfo/>}/>
-					<Route path="/cart" element={<CartPage/>}/>
 				</Routes>
 			</BrowserRouter>
 		</div>
@@ -23,3 +24,11 @@ function App() {
 }
 
 export default App;
+
+export const ProtectedRoutes = ({children}) => {
+	if (localStorage.getItem("currentUser")) {
+		return children
+	} else {
+		return <Navigate to="/login"/>
+	}
+}
