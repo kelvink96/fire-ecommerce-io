@@ -22,7 +22,7 @@ const Header = () => {
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ms-auto">
 							<Nav.Link href="/">{user.email.split('@')[0]}</Nav.Link>
-							<Nav.Link href="/">orders</Nav.Link>
+							<Nav.Link href="/orders">orders</Nav.Link>
 							<Nav.Link href="/cart"><BsCart/> cart {cartItems.length}</Nav.Link>
 							<Nav.Link onClick={logOut}>logout</Nav.Link>
 						</Nav>
