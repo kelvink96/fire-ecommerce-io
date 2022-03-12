@@ -12,18 +12,22 @@ const RegisterPage = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [showToasts, setShowToast] = useState({show: false, message: '', title: ''});
-	const auth = getAuth();
+	const auth = getAuth()
 
 	const register = () => {
-		setLoading(true);
-		createUserWithEmailAndPassword(auth, email, password).then(resp => {
-			setShowToast({show: true, type: 'success', message: 'registration successful', title: 'success'});
-			setLoading(false);
-		}).catch(err => {
-			console.log(err.message);
-			setShowToast({show: true, type: 'error', message: err.message, title: 'error'});
-			setLoading(false);
-		});
+		if (confirmPassword === password) {
+			setLoading(true);
+			createUserWithEmailAndPassword(auth, email, password).then(resp => {
+				setShowToast({show: true, type: 'success', message: 'registration successful', title: 'success'});
+				setLoading(false);
+			}).catch(err => {
+				console.log(err.message);
+				setShowToast({show: true, type: 'error', message: err.message, title: 'error'});
+				setLoading(false);
+			});
+		} else {
+			setShowToast({show: true, type: 'error', message: 'password mismatch', title: 'error'});
+		}
 	}
 
 	return (
