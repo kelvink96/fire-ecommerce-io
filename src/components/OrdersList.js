@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "../components/Layout";
-import {useDispatch, useSelector} from "react-redux";
-import {Accordion, Button, Card, Form, Image, Modal, Spinner, Table, Toast, ToastContainer} from "react-bootstrap";
-import {BsCheck2Circle, BsExclamationCircle, BsTrash} from "react-icons/bs";
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
+import {Accordion, Image, Table} from "react-bootstrap";
 import EmptyDataIcon from "../assets/img/empty-icon.png";
 
-const OrdersPage = () => {
+const OrdersList = () => {
 	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const userId = JSON.parse(localStorage.getItem('currentUser')).user.uid;
 
 	useEffect(() => {
 		setLoading(true);
@@ -18,13 +14,12 @@ const OrdersPage = () => {
 			const ordersArray = [];
 
 			res.forEach(doc => {
-				if (doc.data().userId === userId) {
-					const obj = {id: doc.id, ...doc.data()};
+				const obj = {id: doc.id, ...doc.data()};
 
-					ordersArray.push(obj);
-					setLoading(false);
-				}
+				ordersArray.push(obj);
+				setLoading(false);
 			});
+			console.log(ordersArray);
 			setOrders(ordersArray);
 			setLoading(false);
 		}).catch(err => {
@@ -34,8 +29,7 @@ const OrdersPage = () => {
 	}, [])
 
 	return (
-		<Layout loading={loading}>
-			<h3>orders</h3>
+		<div>
 			<Accordion>
 				{orders.map((o, idx) => {
 					return (
@@ -73,8 +67,8 @@ const OrdersPage = () => {
 					<h6>no orders data</h6>
 				</div>
 			}
-		</Layout>
+		</div>
 	);
 };
 
-export default OrdersPage;
+export default OrdersList;

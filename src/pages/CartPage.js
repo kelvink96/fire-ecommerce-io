@@ -43,7 +43,7 @@ const CartPage = () => {
 			cartItems,
 			addressInfo,
 			email: JSON.parse(localStorage.getItem('currentUser')).user.email,
-			id: JSON.parse(localStorage.getItem('currentUser')).user.uid,
+			userId: JSON.parse(localStorage.getItem('currentUser')).user.uid,
 		}
 
 		setLoading(true);
@@ -75,7 +75,7 @@ const CartPage = () => {
 								<td>{<Image src={c.imageUrl} height={60} rounded={3}/>}</td>
 								<td>{c.name}</td>
 								<td>{c.price}</td>
-								<td><Button variant="outline-danger" onClick={() => deleteFromCart(c)}><BsTrash/>
+								<td><Button variant="outline-danger" size="sm" onClick={() => deleteFromCart(c)}><BsTrash/>
 									<span className="ms-2">delete</span></Button></td>
 							</tr>)}
 						</tbody>
