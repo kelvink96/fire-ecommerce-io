@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
-import {useDispatch, useSelector} from "react-redux";
-import {Accordion, Button, Card, Form, Image, Modal, Spinner, Table, Toast, ToastContainer} from "react-bootstrap";
-import {BsCheck2Circle, BsExclamationCircle, BsTrash} from "react-icons/bs";
+import {Accordion,Image, Table} from "react-bootstrap";
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
 import EmptyDataIcon from "../assets/img/empty-icon.png";

@@ -50,6 +50,9 @@ const CartPage = () => {
 		addDoc(collection(firebaseDB, "orders"), orderPayload).then(resp => {
 			setLoading(false);
 			setShowToast({show: true, type: 'success', message: 'order placement successful', title: 'success'});
+			localStorage.removeItem('cartItems');
+			handleClose();
+			window.location.reload();
 		}).catch(err => {
 			setLoading(false);
 			setShowToast({show: true, type: 'error', message: err.message, title: 'error'});

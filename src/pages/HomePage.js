@@ -5,7 +5,6 @@ import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
 import Layout from "../components/Layout";
 import {useDispatch, useSelector} from "react-redux";
-import EmptyDataIcon from "../assets/img/empty-icon.png";
 
 const HomePage = () => {
 	const [products, setProducts] = useState([]);
@@ -70,7 +69,7 @@ const HomePage = () => {
 					products
 						.filter(p => p.name.toLowerCase().includes(searchKey))
 						.filter(p => p.category.toLowerCase().includes(categoryFilter))
-						.map((p, idx) => (<Col key={p.id}>
+						.map((p, idx) => (<Col key={`prod-${p.id}`}>
 							<Card className="h-100">
 								<Link to={`/productinfo/${p.id}`} className="text-decoration-none text-dark">
 									<Card.Body>

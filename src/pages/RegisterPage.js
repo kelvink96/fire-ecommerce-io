@@ -20,6 +20,9 @@ const RegisterPage = () => {
 			createUserWithEmailAndPassword(auth, email, password).then(resp => {
 				setShowToast({show: true, type: 'success', message: 'registration successful', title: 'success'});
 				setLoading(false);
+				setEmail('');
+				setPassword('');
+				setConfirmPassword('');
 			}).catch(err => {
 				console.log(err.message);
 				setShowToast({show: true, type: 'error', message: err.message, title: 'error'});
