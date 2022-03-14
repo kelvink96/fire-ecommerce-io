@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
 import {Button, Col, Container, Form, Row, Toast, ToastContainer} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {signInWithEmailAndPassword, getAuth} from "firebase/auth";

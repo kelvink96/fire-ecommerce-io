@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {Button, Col, Container, Form, Row, Toast, ToastContainer} from "react-bootstrap";
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-import {BsCheck2, BsCheck2Circle, BsExclamation, BsExclamationCircle, BsSquare, BsSquareFill} from "react-icons/bs";
-import "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+import {BsCheck2Circle, BsExclamationCircle} from "react-icons/bs";
 import Loader from "../components/Loader";
 
 const RegisterPage = () => {
