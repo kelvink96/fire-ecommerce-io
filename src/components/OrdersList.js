@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
-import {Accordion, Image, Table} from "react-bootstrap";
+import {Accordion, Image, Spinner, Table} from "react-bootstrap";
 import EmptyDataIcon from "../assets/img/empty-icon.png";
 
 const OrdersList = () => {
 	const [orders, setOrders] = useState([]);
-	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		setLoading(true);
 		getDocs(collection(firebaseDB, "orders")).then(res => {
 			const ordersArray = [];
 
@@ -17,14 +15,11 @@ const OrdersList = () => {
 				const obj = {id: doc.id, ...doc.data()};
 
 				ordersArray.push(obj);
-				setLoading(false);
 			});
 			console.log(ordersArray);
 			setOrders(ordersArray);
-			setLoading(false);
 		}).catch(err => {
 			console.log(err);
-			setLoading(false);
 		});
 	}, [])
 

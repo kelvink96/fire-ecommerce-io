@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Col, Form, Image, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
@@ -13,10 +13,6 @@ const HomePage = () => {
 	const [categoryFilter, setCategoryFilter] = useState('');
 	const {cartItems} = useSelector(state => state.cartReducer);
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		getProductsData();
-	}, [])
 
 	const getProductsData = async () => {
 		try {
@@ -38,6 +34,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		localStorage.setItem("cartItems", JSON.stringify(cartItems));
+		getProductsData();
 	}, [cartItems]);
 
 	const addToCart = (product) => {

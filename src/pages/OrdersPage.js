@@ -29,7 +29,7 @@ const OrdersPage = () => {
 			console.log(err);
 			setLoading(false);
 		});
-	}, [])
+	}, [userId])
 
 	return (
 		<Layout loading={loading}>
