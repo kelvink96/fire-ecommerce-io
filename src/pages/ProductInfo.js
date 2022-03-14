@@ -16,7 +16,7 @@ const ProductInfo = () => {
 	useEffect(() => {
 		getProductData();
 		localStorage.setItem("cartItems", JSON.stringify(cartItems));
-	}, [cartItems]);
+	}, [cartItems, getProductData]);
 
 
 	const getProductData = () => {

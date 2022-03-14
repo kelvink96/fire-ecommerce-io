@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {collection, getDocs} from "firebase/firestore";
 import firebaseDB from "../firebase.config";
-import {Accordion, Image, Spinner, Table} from "react-bootstrap";
+import {Accordion, Image, Table} from "react-bootstrap";
 import EmptyDataIcon from "../assets/img/empty-icon.png";
 
 const OrdersList = () => {
